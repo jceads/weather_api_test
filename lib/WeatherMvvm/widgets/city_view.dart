@@ -32,7 +32,9 @@ class CityView extends CityViewModel {
             )
           : Weather_View(context),
       floatingActionButton: FloatingActionButton(
-        onPressed: fetchAllData,
+        onPressed: () {
+          fetchAllData(ServicePath.ANTALYA.rawValue);
+        },
         child: Icon(Icons.refresh),
       ),
     );

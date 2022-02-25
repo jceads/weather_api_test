@@ -14,17 +14,17 @@ class CityViewModel extends State<City> {
 
   @override
   void initState() {
-    fetchAllData();
+    fetchAllData(ServicePath.ANTALYA.rawValue);
     super.initState();
   }
 
-  Future<void> fetchAllData() async {
-    final response = await dio.get(ServicePath.ANTALYA.rawValue);
+  Future<void> fetchAllData(String city) async {
+    final response = await dio.get(
+        city); // parametre dışarıdan değiştirilince diomixin exception atıyor
     if (response.statusCode == 200) {
       final data = response.data;
       if (data is Map<String, dynamic>) {
         final baseWeatherModel = Weather.fromJson(data);
-        // weather = baseWeatherModel.results ?? Weather();
         weather = baseWeatherModel;
         log(weather == null
             ? "null"
