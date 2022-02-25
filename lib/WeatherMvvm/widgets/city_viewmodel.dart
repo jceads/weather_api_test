@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:weather_api_test/WeatherMvvm/model/city_model.dart';
 import 'package:weather_api_test/core/service/weather_service.dart';
@@ -7,6 +9,12 @@ import 'city.dart';
 class CityViewModel extends State<City> {
   final dio = WeatherNetwork.instance.dio;
   Weather? weather;
+  bool isLoading = true;
+
+  void changeLoading() {
+    isLoading = !isLoading;
+  }
+
   @override
   void initState() {
     fetchAllData();
