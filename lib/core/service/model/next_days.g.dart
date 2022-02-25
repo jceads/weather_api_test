@@ -31,13 +31,12 @@ BaseNextdaysModel _$BaseNextdaysModelFromJson(Map<String, dynamic> json) =>
       results: (json['results'] as List<dynamic>?)
           ?.map((e) => NextDays.fromJson(e as Map<String, dynamic>))
           .toList(),
-    )..currentConditions = json['currentConditions'] == null
+    )..baseModel = json['baseModel'] == null
         ? null
-        : CurrentConditions.fromJson(
-            json['currentConditions'] as Map<String, dynamic>);
+        : RegionModel.fromJson(json['baseModel'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$BaseNextdaysModelToJson(BaseNextdaysModel instance) =>
     <String, dynamic>{
-      'currentConditions': instance.currentConditions,
+      'baseModel': instance.baseModel,
       'results': instance.results,
     };

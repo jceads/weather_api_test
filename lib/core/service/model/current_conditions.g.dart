@@ -32,21 +32,6 @@ Map<String, dynamic> _$CurrentConditionsToJson(CurrentConditions instance) =>
       'comment': instance.comment,
     };
 
-BaseCurrentConditionsModel _$BaseCurrentConditionsModelFromJson(
-        Map<String, dynamic> json) =>
-    BaseCurrentConditionsModel(
-      currentConditions: json['currentConditions'] == null
-          ? null
-          : CurrentConditions.fromJson(
-              json['currentConditions'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$BaseCurrentConditionsModelToJson(
-        BaseCurrentConditionsModel instance) =>
-    <String, dynamic>{
-      'currentConditions': instance.currentConditions,
-    };
-
 Temp _$TempFromJson(Map<String, dynamic> json) => Temp(
       c: json['c'] as int?,
       f: json['f'] as int?,
@@ -65,4 +50,22 @@ Wind _$WindFromJson(Map<String, dynamic> json) => Wind(
 Map<String, dynamic> _$WindToJson(Wind instance) => <String, dynamic>{
       'km': instance.km,
       'mile': instance.mile,
+    };
+
+BaseCurrentConditionsModel _$BaseCurrentConditionsModelFromJson(
+        Map<String, dynamic> json) =>
+    BaseCurrentConditionsModel(
+      currentConditions: json['currentConditions'] == null
+          ? null
+          : CurrentConditions.fromJson(
+              json['currentConditions'] as Map<String, dynamic>),
+    )..baseModel = json['baseModel'] == null
+        ? null
+        : RegionModel.fromJson(json['baseModel'] as Map<String, dynamic>);
+
+Map<String, dynamic> _$BaseCurrentConditionsModelToJson(
+        BaseCurrentConditionsModel instance) =>
+    <String, dynamic>{
+      'baseModel': instance.baseModel,
+      'currentConditions': instance.currentConditions,
     };

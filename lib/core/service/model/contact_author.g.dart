@@ -24,23 +24,12 @@ BaseContactAuthor _$BaseContactAuthorFromJson(Map<String, dynamic> json) =>
           ? null
           : ContactAuthor.fromJson(
               json['contactAuthor'] as Map<String, dynamic>),
-    )
-      ..day = json['day'] as String?
-      ..comment = json['comment'] as String?
-      ..maxTemp = json['maxTemp'] == null
-          ? null
-          : MaxTemp.fromJson(json['maxTemp'] as Map<String, dynamic>)
-      ..minTemp = json['minTemp'] == null
-          ? null
-          : MaxTemp.fromJson(json['minTemp'] as Map<String, dynamic>)
-      ..iconURL = json['iconURL'] as String?;
+    )..baseModel = json['baseModel'] == null
+        ? null
+        : RegionModel.fromJson(json['baseModel'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$BaseContactAuthorToJson(BaseContactAuthor instance) =>
     <String, dynamic>{
-      'day': instance.day,
-      'comment': instance.comment,
-      'maxTemp': instance.maxTemp,
-      'minTemp': instance.minTemp,
-      'iconURL': instance.iconURL,
+      'baseModel': instance.baseModel,
       'contactAuthor': instance.contactAuthor,
     };

@@ -1,5 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 import 'package:weather_api_test/core/service/model/current_conditions.dart';
+
+import 'region_model.dart';
 part 'next_days.g.dart';
 
 @JsonSerializable()
@@ -47,7 +49,7 @@ class MaxTemp {
 }
 
 @JsonSerializable()
-class BaseNextdaysModel extends BaseCurrentConditionsModel {
+class BaseNextdaysModel extends RegionResponseModel {
   List<NextDays>? results;
   BaseNextdaysModel({this.results});
   factory BaseNextdaysModel.fromJson(Map<String, dynamic> json) {

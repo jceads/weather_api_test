@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:weather_api_test/core/service/model/region_model.dart';
 part 'current_conditions.g.dart';
 
 @JsonSerializable()
@@ -25,20 +26,6 @@ class CurrentConditions {
   }
   Map<String, dynamic> toJson() {
     return _$CurrentConditionsToJson(this);
-  }
-}
-
-@JsonSerializable()
-class BaseCurrentConditionsModel {
-  CurrentConditions? currentConditions;
-  BaseCurrentConditionsModel({this.currentConditions});
-  factory BaseCurrentConditionsModel.fromJson(Map<String, dynamic> json) {
-    return BaseCurrentConditionsModel(
-      currentConditions: json["currentConditions"] == null
-          ? null
-          : CurrentConditions.fromJson(
-              json["currentConditions"] as Map<String, dynamic>),
-    );
   }
 }
 
@@ -71,5 +58,14 @@ class Wind {
 
   Map<String, dynamic> toJson() {
     return _$WindToJson(this);
+  }
+}
+
+@JsonSerializable()
+class BaseCurrentConditionsModel extends RegionResponseModel {
+  CurrentConditions? currentConditions;
+  BaseCurrentConditionsModel({this.currentConditions});
+  factory BaseCurrentConditionsModel.fromJson(Map<String, dynamic> json) {
+    return _$BaseCurrentConditionsModelFromJson(json);
   }
 }
