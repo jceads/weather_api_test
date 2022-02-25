@@ -5,6 +5,7 @@
 import 'dart:convert';
 
 import 'package:json_annotation/json_annotation.dart';
+import 'package:weather_api_test/core/service/model/region_model.dart';
 part 'city_model.g.dart';
 
 Weather weatherFromJson(String str) => Weather.fromJson(json.decode(str));
@@ -150,10 +151,10 @@ class NextDay {
 }
 
 @JsonSerializable()
-class BaseResponseModel {
-  List<Weather>? results;
-  BaseResponseModel({this.results});
-  factory BaseResponseModel.fromJson(Map<String, dynamic> json) {
-    return _$BaseResponseModelFromJson(json);
+class BaseWeatherModel extends RegionModel {
+  Weather? results;
+  BaseWeatherModel({this.results});
+  factory BaseWeatherModel.fromJson(Map<String, dynamic> json) {
+    return _$BaseWeatherModelFromJson(json);
   }
 }

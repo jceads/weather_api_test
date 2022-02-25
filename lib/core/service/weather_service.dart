@@ -18,16 +18,16 @@ class WeatherNetwork {
     dio.interceptors.add(InterceptorsWrapper(
       onResponse: (e, handler) {
         final data = e.data;
-        print(e.toString());
-        // print(e.data.toString());
-        // print(e.realUri.toString());
         if (data is Map<String, dynamic>) {
           final model = RegionModel.fromJson(data);
           if (model.region == null) {
             handler.reject(
                 DioError(requestOptions: RequestOptions(path: e.realUri.path)));
+            return;
           }
+          // e.data = data["regions"];
         }
+        handler.next(e);
       },
     ));
   }

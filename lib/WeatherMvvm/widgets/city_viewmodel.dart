@@ -6,20 +6,21 @@ import 'city.dart';
 
 class CityViewModel extends State<City> {
   final dio = WeatherNetwork.instance.dio;
-  List<Weather> weathers = [];
+  Weather? weather;
+  @override
+  void initState() {
+    fetchAllData();
+    super.initState();
+  }
 
   Future<void> fetchAllData() async {
-    final response =
-        await dio.get("https://weatherdbi.herokuapp.com/data/weather/london");
-    print(response);
-
+    final response = await dio.get(ServicePath.LONDON.rawValue);
     if (response.statusCode == 200) {
       final data = response.data;
       if (data is Map<String, dynamic>) {
-        final baseWeatherModel = BaseResponseModel.fromJson(data);
-        weathers = baseWeatherModel.results ?? [];
-      } else if (data is List) {
-        weathers = data.map((e) => Weather.fromJson(e)).toList();
+        final baseWeatherModel = Weather.fromJson(data);
+        // weather = baseWeatherModel.results ?? Weather();
+        weather = baseWeatherModel;
       }
     }
     setState(() {});

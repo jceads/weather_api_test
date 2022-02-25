@@ -72,14 +72,15 @@ Map<String, dynamic> _$NextDayToJson(NextDay instance) => <String, dynamic>{
       'iconUrl': instance.iconUrl,
     };
 
-BaseResponseModel _$BaseResponseModelFromJson(Map<String, dynamic> json) =>
-    BaseResponseModel(
-      results: (json['results'] as List<dynamic>?)
-          ?.map((e) => Weather.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
+BaseWeatherModel _$BaseWeatherModelFromJson(Map<String, dynamic> json) =>
+    BaseWeatherModel(
+      results: json['results'] == null
+          ? null
+          : Weather.fromJson(json['results'] as Map<String, dynamic>),
+    )..region = json['region'] as String?;
 
-Map<String, dynamic> _$BaseResponseModelToJson(BaseResponseModel instance) =>
+Map<String, dynamic> _$BaseWeatherModelToJson(BaseWeatherModel instance) =>
     <String, dynamic>{
+      'region': instance.region,
       'results': instance.results,
     };

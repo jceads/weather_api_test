@@ -6,23 +6,29 @@ class CityView extends CityViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      // appBar: AppBar(title: Text(weathers.first.dataSource ?? "Null aPbbar")),
-      body: ListviewMethod(),
+      appBar: AppBar(
+        title: Text(weather?.region ?? "null region data"),
+      ),
+      body: Column(
+        children: [
+          Text(weather?.currentConditions?.temp?.c.toString() ??
+              "null temperature value"),
+        ],
+      ),
       floatingActionButton: FloatingActionButton(
         onPressed: fetchAllData,
-        child: Icon(Icons.download),
+        child: const Icon(Icons.download),
       ),
     );
   }
 
   ListView ListviewMethod() {
     return ListView.builder(
-        itemBuilder: (context, index) => Card(
+        itemBuilder: (context, index) => const Card(
               child: ListTile(
-                title: Text(weathers[index].region ?? "region"),
+                title: Text(" listtile"),
               ),
             ),
-        itemCount: weathers.length);
+        itemCount: 10);
   }
 }
