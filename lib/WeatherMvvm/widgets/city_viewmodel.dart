@@ -11,10 +11,6 @@ class CityViewModel extends State<City> {
   Weather? weather;
   bool isLoading = true;
 
-  void changeLoading() {
-    isLoading = !isLoading;
-  }
-
   @override
   void initState() {
     fetchAllData();
@@ -22,7 +18,7 @@ class CityViewModel extends State<City> {
   }
 
   Future<void> fetchAllData() async {
-    final response = await dio.get(ServicePath.LONDON.rawValue);
+    final response = await dio.get(ServicePath.ANTALYA.rawValue);
     if (response.statusCode == 200) {
       final data = response.data;
       if (data is Map<String, dynamic>) {
@@ -40,13 +36,17 @@ class CityViewModel extends State<City> {
   }
 }
 
-enum ServicePath { LONDON }
+enum ServicePath { LONDON, ANTALYA, ISTANBUL }
 
 extension ServicePathExtension on ServicePath {
   String get rawValue {
     switch (this) {
       case ServicePath.LONDON:
         return "london";
+      case ServicePath.ANTALYA:
+        return "Antalya";
+      case ServicePath.ISTANBUL:
+        return "Istanbul";
     }
   }
 }

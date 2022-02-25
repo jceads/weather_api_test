@@ -7,7 +7,7 @@ class CityView extends CityViewModel {
   // var _textStyle = TextStyle(color: Colors.black);
   bool _isloading = true;
   Future<void> changeLoading() async {
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 2));
     _isloading = !_isloading;
   }
 
@@ -20,11 +20,13 @@ class CityView extends CityViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xff4cafd0),
+        backgroundColor: const Color(0xff4cafd0),
         appBar: appbar(),
         body: _isloading == true
-            ? Center(
-                child: CircularProgressIndicator(),
+            ? const Center(
+                child: const CircularProgressIndicator(
+                  color: Colors.white,
+                ),
               )
             : Weather_View(context));
   }
@@ -39,6 +41,13 @@ class CityView extends CityViewModel {
             regionText(context),
             IconMethod(),
             DegreeText(context),
+            Text(
+              weather?.currentConditions?.comment ?? "null comment value",
+              style: Theme.of(context)
+                  .textTheme
+                  .headline5
+                  ?.copyWith(fontWeight: FontWeight.w300),
+            )
           ],
         ),
         DayofTheWeekText(context)
@@ -56,7 +65,7 @@ class CityView extends CityViewModel {
 
   Widget DayofTheWeekText(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(bottom: 20),
+      padding: const EdgeInsets.only(bottom: 20),
       child: Text(
         DateFormat('EEEE').format(DateTime.now()),
         style: Theme.of(context).textTheme.displaySmall,
@@ -67,7 +76,7 @@ class CityView extends CityViewModel {
   Container DegreeText(BuildContext context) {
     return Container(
       child: Padding(
-        padding: EdgeInsets.symmetric(vertical: 10),
+        padding: const EdgeInsets.symmetric(vertical: 10),
         child: Text(
           weather?.currentConditions?.temp?.c?.toString() ??
               "null temperature Value",
@@ -79,7 +88,7 @@ class CityView extends CityViewModel {
 
   Container regionText(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 10, bottom: 20),
+      padding: const EdgeInsets.only(top: 10, bottom: 20),
       child: Text(
         weather?.region ?? "Null region data",
         style: Theme.of(context)
@@ -111,15 +120,5 @@ class CityView extends CityViewModel {
       elevation: 0,
       backgroundColor: Colors.transparent,
     );
-  }
-
-  ListView ListviewMethod() {
-    return ListView.builder(
-        itemBuilder: (context, index) => const Card(
-              child: ListTile(
-                title: Text(" listtile"),
-              ),
-            ),
-        itemCount: 10);
   }
 }
