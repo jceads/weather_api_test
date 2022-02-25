@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:weather_api_test/WeatherMvvm/model/city_model.dart';
+import 'package:weather_api_test/core/service/model/next_days.dart';
 import 'package:weather_api_test/core/service/weather_service.dart';
 
 import 'city.dart';
@@ -25,6 +26,9 @@ class CityViewModel extends State<City> {
         final baseWeatherModel = Weather.fromJson(data);
         // weather = baseWeatherModel.results ?? Weather();
         weather = baseWeatherModel;
+        log(weather == null
+            ? "null"
+            : weather!.nextDays?[0].toString() ?? "null liste");
       }
     }
     setState(() {});

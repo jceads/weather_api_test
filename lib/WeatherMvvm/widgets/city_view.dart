@@ -5,6 +5,8 @@ import 'city_viewmodel.dart';
 
 class CityView extends CityViewModel {
   // var _textStyle = TextStyle(color: Colors.black);
+  final double widthAndHeight = 300;
+  final Color scaffoldColor = const Color(0xff4cafd0);
   bool _isloading = true;
   Future<void> changeLoading() async {
     await Future.delayed(const Duration(seconds: 2));
@@ -20,15 +22,20 @@ class CityView extends CityViewModel {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xff4cafd0),
-        appBar: appbar(),
-        body: _isloading == true
-            ? const Center(
-                child: const CircularProgressIndicator(
-                  color: Colors.white,
-                ),
-              )
-            : Weather_View(context));
+      backgroundColor: scaffoldColor,
+      appBar: appbar(),
+      body: _isloading == true
+          ? const Center(
+              child: const CircularProgressIndicator(
+                color: Colors.white,
+              ),
+            )
+          : Weather_View(context),
+      floatingActionButton: FloatingActionButton(
+        onPressed: fetchAllData,
+        child: Icon(Icons.refresh),
+      ),
+    );
   }
 
   Column Weather_View(BuildContext context) {
@@ -41,17 +48,24 @@ class CityView extends CityViewModel {
             regionText(context),
             IconMethod(),
             DegreeText(context),
-            Text(
-              weather?.currentConditions?.comment ?? "null comment value",
-              style: Theme.of(context)
-                  .textTheme
-                  .headline5
-                  ?.copyWith(fontWeight: FontWeight.w300),
-            )
+            CommentText(context),
           ],
         ),
-        DayofTheWeekText(context)
+        DayofTheWeekText(context),
       ],
+    );
+  }
+
+  Widget CommentText(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 20),
+      child: Text(
+        weather?.currentConditions?.comment ?? "null comment value",
+        style: Theme.of(context)
+            .textTheme
+            .headline5
+            ?.copyWith(fontWeight: FontWeight.w300),
+      ),
     );
   }
 
@@ -75,14 +89,33 @@ class CityView extends CityViewModel {
 
   Container DegreeText(BuildContext context) {
     return Container(
+      width: 150,
+      height: 150,
+
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(255, 54, 126, 150),
+        borderRadius: BorderRadius.circular(100),
+      ),
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 10),
-        child: Text(
-          weather?.currentConditions?.temp?.c?.toString() ??
-              "null temperature Value",
-          style: Theme.of(context).textTheme.displayLarge,
+        padding: const EdgeInsets.all(8.0),
+        child: CircleAvatar(
+          child: Text(
+            weather?.currentConditions?.temp?.c.toString() ?? "null",
+            style: const TextStyle(
+                fontSize: 70, fontWeight: FontWeight.w200, color: Colors.white),
+            textAlign: TextAlign.center,
+          ),
+          backgroundColor: scaffoldColor,
         ),
       ),
+      // child: Padding(
+      //   padding: const EdgeInsets.symmetric(vertical: 10),
+      //   child: Text(
+      //     weather?.currentConditions?.temp?.c?.toString() ??
+      //         "null temperature Value",
+      //     style: Theme.of(context).textTheme.displayLarge,
+      //   ),
+      // ),
     );
   }
 

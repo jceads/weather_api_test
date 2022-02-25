@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:weather_api_test/core/service/model/current_conditions.dart';
 
 import 'region_model.dart';
 part 'next_days.g.dart';
@@ -29,22 +28,19 @@ class NextDays {
   }
 }
 
+@JsonSerializable()
 class MaxTemp {
   int? c;
   int? f;
 
   MaxTemp({this.c, this.f});
 
-  MaxTemp.fromJson(Map<String, dynamic> json) {
-    c = json['c'];
-    f = json['f'];
+  factory MaxTemp.fromJson(Map<String, dynamic> json) {
+    return _$MaxTempFromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['c'] = c;
-    data['f'] = f;
-    return data;
+    return _$MaxTempToJson(this);
   }
 }
 

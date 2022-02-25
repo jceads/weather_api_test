@@ -17,14 +17,14 @@ class Weather {
   Weather({
     this.region,
     this.currentConditions,
-    // this.nextDays,
+    this.nextDays,
     this.contactAuthor,
     this.dataSource,
   });
 
   String? region;
   CurrentConditions? currentConditions;
-  // List<NextDay>? nextDays;
+  List<NextDay>? nextDays;
   ContactAuthor? contactAuthor;
   String? dataSource;
 

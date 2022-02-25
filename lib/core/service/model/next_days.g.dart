@@ -26,6 +26,16 @@ Map<String, dynamic> _$NextDaysToJson(NextDays instance) => <String, dynamic>{
       'iconURL': instance.iconURL,
     };
 
+MaxTemp _$MaxTempFromJson(Map<String, dynamic> json) => MaxTemp(
+      c: json['c'] as int?,
+      f: json['f'] as int?,
+    );
+
+Map<String, dynamic> _$MaxTempToJson(MaxTemp instance) => <String, dynamic>{
+      'c': instance.c,
+      'f': instance.f,
+    };
+
 BaseNextdaysModel _$BaseNextdaysModelFromJson(Map<String, dynamic> json) =>
     BaseNextdaysModel(
       results: (json['results'] as List<dynamic>?)

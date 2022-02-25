@@ -12,6 +12,9 @@ Weather _$WeatherFromJson(Map<String, dynamic> json) => Weather(
           ? null
           : CurrentConditions.fromJson(
               json['currentConditions'] as Map<String, dynamic>),
+      nextDays: (json['nextDays'] as List<dynamic>?)
+          ?.map((e) => NextDay.fromJson(e as Map<String, dynamic>))
+          .toList(),
       contactAuthor: json['contactAuthor'] == null
           ? null
           : ContactAuthor.fromJson(
@@ -22,6 +25,7 @@ Weather _$WeatherFromJson(Map<String, dynamic> json) => Weather(
 Map<String, dynamic> _$WeatherToJson(Weather instance) => <String, dynamic>{
       'region': instance.region,
       'currentConditions': instance.currentConditions,
+      'nextDays': instance.nextDays,
       'contactAuthor': instance.contactAuthor,
       'dataSource': instance.dataSource,
     };
