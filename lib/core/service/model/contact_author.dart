@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:weather_api_test/core/service/model/next_days.dart';
 
 import 'region_model.dart';
 

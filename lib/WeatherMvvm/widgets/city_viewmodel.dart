@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:weather_api_test/WeatherMvvm/model/city_model.dart';
-import 'package:weather_api_test/core/service/model/next_days.dart';
 import 'package:weather_api_test/core/service/weather_service.dart';
 
 import 'city.dart';
@@ -14,7 +13,7 @@ class CityViewModel extends State<City> {
 
   @override
   void initState() {
-    fetchAllData(ServicePath.ANTALYA.rawValue);
+    fetchAllData(ServicePath.LONDON.rawValue);
     super.initState();
   }
 
@@ -26,9 +25,7 @@ class CityViewModel extends State<City> {
       if (data is Map<String, dynamic>) {
         final baseWeatherModel = Weather.fromJson(data);
         weather = baseWeatherModel;
-        log(weather == null
-            ? "null"
-            : weather!.nextDays?[0].toString() ?? "null liste");
+        weather?.nextDays = baseWeatherModel.nextDays;
       }
     }
     setState(() {});

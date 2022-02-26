@@ -2,8 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:weather_api_test/core/service/model/region_model.dart';
 
 class WeatherNetwork {
-  final String _baseUrl =
-      "https://weatherdbi.herokuapp.com/data/weather/london";
+  final String _baseUrl = "https://weatherdbi.herokuapp.com/data/weather/";
   static WeatherNetwork? _instance;
   static WeatherNetwork get instance {
     if (_instance != null) return _instance!;
