@@ -52,9 +52,9 @@ Map<String, dynamic> _$WindToJson(Wind instance) => <String, dynamic>{
       'mile': instance.mile,
     };
 
-BaseCurrentConditionsModel _$BaseCurrentConditionsModelFromJson(
+BaseResponseCurrentConditions _$BaseResponseCurrentConditionsFromJson(
         Map<String, dynamic> json) =>
-    BaseCurrentConditionsModel(
+    BaseResponseCurrentConditions(
       currentConditions: json['currentConditions'] == null
           ? null
           : CurrentConditions.fromJson(
@@ -63,8 +63,8 @@ BaseCurrentConditionsModel _$BaseCurrentConditionsModelFromJson(
         ? null
         : RegionModel.fromJson(json['baseModel'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$BaseCurrentConditionsModelToJson(
-        BaseCurrentConditionsModel instance) =>
+Map<String, dynamic> _$BaseResponseCurrentConditionsToJson(
+        BaseResponseCurrentConditions instance) =>
     <String, dynamic>{
       'baseModel': instance.baseModel,
       'currentConditions': instance.currentConditions,

@@ -18,18 +18,30 @@ Map<String, dynamic> _$ContactAuthorToJson(ContactAuthor instance) =>
       'authNote': instance.authNote,
     };
 
-BaseContactAuthor _$BaseContactAuthorFromJson(Map<String, dynamic> json) =>
-    BaseContactAuthor(
-      contactAuthor: json['contactAuthor'] == null
+BaseResponseContactAuthor _$BaseResponseContactAuthorFromJson(
+        Map<String, dynamic> json) =>
+    BaseResponseContactAuthor(
+      contact_author: json['contact_author'] == null
           ? null
           : ContactAuthor.fromJson(
-              json['contactAuthor'] as Map<String, dynamic>),
-    )..baseModel = json['baseModel'] == null
-        ? null
-        : RegionModel.fromJson(json['baseModel'] as Map<String, dynamic>);
+              json['contact_author'] as Map<String, dynamic>),
+    )
+      ..baseModel = json['baseModel'] == null
+          ? null
+          : RegionModel.fromJson(json['baseModel'] as Map<String, dynamic>)
+      ..currentConditions = json['currentConditions'] == null
+          ? null
+          : CurrentConditions.fromJson(
+              json['currentConditions'] as Map<String, dynamic>)
+      ..next_days = (json['next_days'] as List<dynamic>?)
+          ?.map((e) => NextDay.fromJson(e as Map<String, dynamic>))
+          .toList();
 
-Map<String, dynamic> _$BaseContactAuthorToJson(BaseContactAuthor instance) =>
+Map<String, dynamic> _$BaseResponseContactAuthorToJson(
+        BaseResponseContactAuthor instance) =>
     <String, dynamic>{
       'baseModel': instance.baseModel,
-      'contactAuthor': instance.contactAuthor,
+      'currentConditions': instance.currentConditions,
+      'next_days': instance.next_days,
+      'contact_author': instance.contact_author,
     };

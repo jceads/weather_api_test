@@ -48,6 +48,7 @@ class CityView extends CityViewModel {
           children: [
             timeText(context),
             regionText(context),
+            Text(weather?.nextDays?[0].day ?? "null nextday"),
             IconMethod(),
             DegreeText(context),
             CommentText(context),

@@ -1,4 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:weather_api_test/core/service/model/current_conditions.dart';
+import 'package:weather_api_test/core/service/model/next_days.dart';
 
 import 'region_model.dart';
 
@@ -21,10 +23,13 @@ class ContactAuthor {
 }
 
 @JsonSerializable()
-class BaseContactAuthor extends RegionResponseModel {
-  ContactAuthor? contactAuthor;
-  BaseContactAuthor({this.contactAuthor});
-  factory BaseContactAuthor.fromJson(Map<String, dynamic> json) {
-    return _$BaseContactAuthorFromJson(json);
+class BaseResponseContactAuthor extends BaseResponseNextDay {
+  ContactAuthor? contact_author;
+  BaseResponseContactAuthor({this.contact_author});
+  factory BaseResponseContactAuthor.fromJson(Map<String, dynamic> json) {
+    return _$BaseResponseContactAuthorFromJson(json);
+  }
+  Map<String, dynamic> toJson() {
+    return _$BaseResponseContactAuthorToJson(this);
   }
 }

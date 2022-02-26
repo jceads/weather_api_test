@@ -1,30 +1,25 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:weather_api_test/core/service/model/current_conditions.dart';
 
 import 'region_model.dart';
 part 'next_days.g.dart';
 
 @JsonSerializable()
-class NextDays {
+class NextDay {
   String? day;
   String? comment;
   MaxTemp? maxTemp;
   MaxTemp? minTemp;
   String? iconURL;
 
-  NextDays({
-    this.day,
-    this.comment,
-    this.maxTemp,
-    this.minTemp,
-    this.iconURL,
-  });
+  NextDay({this.day, this.comment, this.maxTemp, this.minTemp, this.iconURL});
 
-  factory NextDays.fromJson(Map<String, dynamic> json) {
-    return _$NextDaysFromJson(json);
+  factory NextDay.fromJson(Map<String, dynamic> json) {
+    return _$NextDayFromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return _$NextDaysToJson(this);
+    return _$NextDayToJson(this);
   }
 }
 
@@ -45,10 +40,10 @@ class MaxTemp {
 }
 
 @JsonSerializable()
-class BaseNextdaysModel extends RegionResponseModel {
-  List<NextDays>? results;
-  BaseNextdaysModel({this.results});
-  factory BaseNextdaysModel.fromJson(Map<String, dynamic> json) {
-    return _$BaseNextdaysModelFromJson(json);
+class BaseResponseNextDay extends BaseResponseCurrentConditions {
+  List<NextDay>? next_days;
+  BaseResponseNextDay({this.next_days});
+  factory BaseResponseNextDay.fromJson(Map<String, dynamic> json) {
+    return _$BaseResponseNextDayFromJson(json);
   }
 }

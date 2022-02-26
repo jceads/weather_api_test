@@ -13,11 +13,11 @@ class RegionModel {
   Map<String, dynamic> toJson() => {"region": region};
 }
 
-class RegionResponseModel {
+class BaseResponseRegion {
   RegionModel? baseModel;
-  RegionResponseModel({this.baseModel});
-  factory RegionResponseModel.fromJson(Map<String, dynamic> json) {
-    return RegionResponseModel(
+  BaseResponseRegion({this.baseModel});
+  factory BaseResponseRegion.fromJson(Map<String, dynamic> json) {
+    return BaseResponseRegion(
       baseModel: json["region"] == null
           ? null
           : RegionModel.fromJson(json["region"] as Map<String, dynamic>),

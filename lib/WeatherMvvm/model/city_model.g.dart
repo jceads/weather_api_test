@@ -81,10 +81,12 @@ BaseWeatherModel _$BaseWeatherModelFromJson(Map<String, dynamic> json) =>
       results: json['results'] == null
           ? null
           : Weather.fromJson(json['results'] as Map<String, dynamic>),
-    )..region = json['region'] as String?;
+    )..baseModel = json['baseModel'] == null
+        ? null
+        : RegionModel.fromJson(json['baseModel'] as Map<String, dynamic>);
 
 Map<String, dynamic> _$BaseWeatherModelToJson(BaseWeatherModel instance) =>
     <String, dynamic>{
-      'region': instance.region,
+      'baseModel': instance.baseModel,
       'results': instance.results,
     };

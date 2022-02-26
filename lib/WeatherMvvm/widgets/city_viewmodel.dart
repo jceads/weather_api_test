@@ -25,7 +25,6 @@ class CityViewModel extends State<City> {
       if (data is Map<String, dynamic>) {
         final baseWeatherModel = Weather.fromJson(data);
         weather = baseWeatherModel;
-        weather?.nextDays = baseWeatherModel.nextDays;
       }
     }
     setState(() {});

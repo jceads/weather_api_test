@@ -62,10 +62,10 @@ class Wind {
 }
 
 @JsonSerializable()
-class BaseCurrentConditionsModel extends RegionResponseModel {
+class BaseResponseCurrentConditions extends BaseResponseRegion {
   CurrentConditions? currentConditions;
-  BaseCurrentConditionsModel({this.currentConditions});
-  factory BaseCurrentConditionsModel.fromJson(Map<String, dynamic> json) {
-    return _$BaseCurrentConditionsModelFromJson(json);
+  BaseResponseCurrentConditions({this.currentConditions});
+  factory BaseResponseCurrentConditions.fromJson(Map<String, dynamic> json) {
+    return _$BaseResponseCurrentConditionsFromJson(json);
   }
 }

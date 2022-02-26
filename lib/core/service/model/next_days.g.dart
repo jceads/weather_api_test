@@ -6,7 +6,7 @@ part of 'next_days.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-NextDays _$NextDaysFromJson(Map<String, dynamic> json) => NextDays(
+NextDay _$NextDayFromJson(Map<String, dynamic> json) => NextDay(
       day: json['day'] as String?,
       comment: json['comment'] as String?,
       maxTemp: json['maxTemp'] == null
@@ -18,7 +18,7 @@ NextDays _$NextDaysFromJson(Map<String, dynamic> json) => NextDays(
       iconURL: json['iconURL'] as String?,
     );
 
-Map<String, dynamic> _$NextDaysToJson(NextDays instance) => <String, dynamic>{
+Map<String, dynamic> _$NextDayToJson(NextDay instance) => <String, dynamic>{
       'day': instance.day,
       'comment': instance.comment,
       'maxTemp': instance.maxTemp,
@@ -36,17 +36,24 @@ Map<String, dynamic> _$MaxTempToJson(MaxTemp instance) => <String, dynamic>{
       'f': instance.f,
     };
 
-BaseNextdaysModel _$BaseNextdaysModelFromJson(Map<String, dynamic> json) =>
-    BaseNextdaysModel(
-      results: (json['results'] as List<dynamic>?)
-          ?.map((e) => NextDays.fromJson(e as Map<String, dynamic>))
+BaseResponseNextDay _$BaseResponseNextDayFromJson(Map<String, dynamic> json) =>
+    BaseResponseNextDay(
+      next_days: (json['next_days'] as List<dynamic>?)
+          ?.map((e) => NextDay.fromJson(e as Map<String, dynamic>))
           .toList(),
-    )..baseModel = json['baseModel'] == null
-        ? null
-        : RegionModel.fromJson(json['baseModel'] as Map<String, dynamic>);
+    )
+      ..baseModel = json['baseModel'] == null
+          ? null
+          : RegionModel.fromJson(json['baseModel'] as Map<String, dynamic>)
+      ..currentConditions = json['currentConditions'] == null
+          ? null
+          : CurrentConditions.fromJson(
+              json['currentConditions'] as Map<String, dynamic>);
 
-Map<String, dynamic> _$BaseNextdaysModelToJson(BaseNextdaysModel instance) =>
+Map<String, dynamic> _$BaseResponseNextDayToJson(
+        BaseResponseNextDay instance) =>
     <String, dynamic>{
       'baseModel': instance.baseModel,
-      'results': instance.results,
+      'currentConditions': instance.currentConditions,
+      'next_days': instance.next_days,
     };

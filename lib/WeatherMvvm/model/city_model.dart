@@ -151,7 +151,7 @@ class NextDay {
 }
 
 @JsonSerializable()
-class BaseWeatherModel extends RegionModel {
+class BaseWeatherModel extends BaseResponseRegion {
   Weather? results;
   BaseWeatherModel({this.results});
   factory BaseWeatherModel.fromJson(Map<String, dynamic> json) {
