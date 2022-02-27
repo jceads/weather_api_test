@@ -13,13 +13,13 @@ class CityViewModel extends State<City> {
 
   @override
   void initState() {
-    fetchAllData(ServicePath.LONDON.rawValue);
+    fetchAllData(ServicePath.ANTALYA.rawValue);
     super.initState();
   }
 
   Future<void> fetchAllData(String city) async {
-    final response = await dio.get(
-        city); // parametre dışarıdan değiştirilince diomixin exception atıyor
+    isLoading = true;
+    final response = await dio.get(city);
     if (response.statusCode == 200) {
       final data = response.data;
       if (data is Map<String, dynamic>) {

@@ -15,33 +15,33 @@ class BaseModel {
   BaseModel.fromJson(Map<String, dynamic> json) {
     region = json['region'];
     currentConditions = json['currentConditions'] != null
-        ? new CurrentConditions.fromJson(json['currentConditions'])
+        ? CurrentConditions.fromJson(json['currentConditions'])
         : null;
     if (json['next_days'] != null) {
       nextDays = <NextDays>[];
       json['next_days'].forEach((v) {
-        nextDays!.add(new NextDays.fromJson(v));
+        nextDays!.add(NextDays.fromJson(v));
       });
     }
     contactAuthor = json['contact_author'] != null
-        ? new ContactAuthor.fromJson(json['contact_author'])
+        ? ContactAuthor.fromJson(json['contact_author'])
         : null;
     dataSource = json['data_source'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['region'] = this.region;
-    if (this.currentConditions != null) {
-      data['currentConditions'] = this.currentConditions!.toJson();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['region'] = region;
+    if (currentConditions != null) {
+      data['currentConditions'] = currentConditions!.toJson();
     }
-    if (this.nextDays != null) {
-      data['next_days'] = this.nextDays!.map((v) => v.toJson()).toList();
+    if (nextDays != null) {
+      data['next_days'] = nextDays!.map((v) => v.toJson()).toList();
     }
-    if (this.contactAuthor != null) {
-      data['contact_author'] = this.contactAuthor!.toJson();
+    if (contactAuthor != null) {
+      data['contact_author'] = contactAuthor!.toJson();
     }
-    data['data_source'] = this.dataSource;
+    data['data_source'] = dataSource;
     return data;
   }
 }
@@ -66,27 +66,27 @@ class CurrentConditions {
 
   CurrentConditions.fromJson(Map<String, dynamic> json) {
     dayhour = json['dayhour'];
-    temp = json['temp'] != null ? new Temp.fromJson(json['temp']) : null;
+    temp = json['temp'] != null ? Temp.fromJson(json['temp']) : null;
     precip = json['precip'];
     humidity = json['humidity'];
-    wind = json['wind'] != null ? new Wind.fromJson(json['wind']) : null;
+    wind = json['wind'] != null ? Wind.fromJson(json['wind']) : null;
     iconURL = json['iconURL'];
     comment = json['comment'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['dayhour'] = this.dayhour;
-    if (this.temp != null) {
-      data['temp'] = this.temp!.toJson();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['dayhour'] = dayhour;
+    if (temp != null) {
+      data['temp'] = temp!.toJson();
     }
-    data['precip'] = this.precip;
-    data['humidity'] = this.humidity;
-    if (this.wind != null) {
-      data['wind'] = this.wind!.toJson();
+    data['precip'] = precip;
+    data['humidity'] = humidity;
+    if (wind != null) {
+      data['wind'] = wind!.toJson();
     }
-    data['iconURL'] = this.iconURL;
-    data['comment'] = this.comment;
+    data['iconURL'] = iconURL;
+    data['comment'] = comment;
     return data;
   }
 }
@@ -103,9 +103,9 @@ class Temp {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['c'] = this.c;
-    data['f'] = this.f;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['c'] = c;
+    data['f'] = f;
     return data;
   }
 }
@@ -122,9 +122,9 @@ class Wind {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['km'] = this.km;
-    data['mile'] = this.mile;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['km'] = km;
+    data['mile'] = mile;
     return data;
   }
 }
@@ -141,24 +141,22 @@ class NextDays {
   NextDays.fromJson(Map<String, dynamic> json) {
     day = json['day'];
     comment = json['comment'];
-    maxTemp =
-        json['max_temp'] != null ? new Temp.fromJson(json['max_temp']) : null;
-    minTemp =
-        json['min_temp'] != null ? new Temp.fromJson(json['min_temp']) : null;
+    maxTemp = json['max_temp'] != null ? Temp.fromJson(json['max_temp']) : null;
+    minTemp = json['min_temp'] != null ? Temp.fromJson(json['min_temp']) : null;
     iconURL = json['iconURL'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['day'] = this.day;
-    data['comment'] = this.comment;
-    if (this.maxTemp != null) {
-      data['max_temp'] = this.maxTemp!.toJson();
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['day'] = day;
+    data['comment'] = comment;
+    if (maxTemp != null) {
+      data['max_temp'] = maxTemp!.toJson();
     }
-    if (this.minTemp != null) {
-      data['min_temp'] = this.minTemp!.toJson();
+    if (minTemp != null) {
+      data['min_temp'] = minTemp!.toJson();
     }
-    data['iconURL'] = this.iconURL;
+    data['iconURL'] = iconURL;
     return data;
   }
 }
@@ -175,9 +173,9 @@ class ContactAuthor {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['email'] = this.email;
-    data['auth_note'] = this.authNote;
+    final Map<String, dynamic> data = Map<String, dynamic>();
+    data['email'] = email;
+    data['auth_note'] = authNote;
     return data;
   }
 }

@@ -4,7 +4,6 @@ import 'package:intl/intl.dart';
 import 'city_viewmodel.dart';
 
 class CityView extends CityViewModel {
-  // var _textStyle = TextStyle(color: Colors.black);
   final double widthAndHeight = 300;
   final Color scaffoldColor = const Color(0xff4cafd0);
   bool _isloading = true;
@@ -24,13 +23,7 @@ class CityView extends CityViewModel {
     return Scaffold(
       backgroundColor: scaffoldColor,
       appBar: appbar(),
-      body: _isloading == true
-          ? const Center(
-              child: const CircularProgressIndicator(
-                color: Colors.white,
-              ),
-            )
-          : Weather_View(context),
+      body: _isloading == true ? ProgressBar() : weather_data(context),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           fetchAllData(ServicePath.ANTALYA.rawValue);
@@ -40,100 +33,69 @@ class CityView extends CityViewModel {
     );
   }
 
-  Column Weather_View(BuildContext context) {
+  Center ProgressBar() {
+    return const Center(
+      child: CircularProgressIndicator(
+        color: Colors.white,
+      ),
+    );
+  }
+
+  Widget weather_data(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Column(
-          children: [
-            timeText(context),
-            regionText(context),
-            Text(basemodel?.nextDays?[3].day ?? "null next days"),
-            IconMethod(),
-            DegreeText(context),
-            CommentText(context),
-          ],
-        ),
-        DayofTheWeekText(context),
+        Expanded(flex: 1, child: TextTime(context)),
+        Expanded(flex: 1, child: TextTempe(context)),
+        Expanded(flex: 1, child: TextComment(context)),
+        Expanded(flex: 1, child: TextDay(context)),
+        Expanded(flex: 1, child: NextDayBuilder())
       ],
     );
   }
 
-  Widget CommentText(BuildContext context) {
+  ListView NextDayBuilder() {
+    return ListView.builder(
+      scrollDirection: Axis.horizontal,
+      itemBuilder: (context, index) => Card(child: NextDayWidgets(index)),
+      itemCount: basemodel?.nextDays?.length,
+    );
+  }
+
+  Container NextDayWidgets(int index) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 20),
-      child: Text(
-        basemodel?.currentConditions?.comment ?? "null comment value",
-        style: Theme.of(context)
-            .textTheme
-            .headline5
-            ?.copyWith(fontWeight: FontWeight.w300),
+      decoration: const BoxDecoration(color: Color(0xff4cafd0)),
+      width: 100,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(basemodel?.nextDays![index].day ?? " "),
+          const Divider(),
+          Text("Max temp: ${basemodel?.nextDays![index].maxTemp?.c}"),
+          Text("Min temp: ${basemodel?.nextDays![index].minTemp?.c}"),
+          Text("${basemodel?.nextDays![index].comment}")
+        ],
       ),
     );
   }
 
-  Container IconMethod() {
-    return Container(
-      child: basemodel?.currentConditions?.iconURL == null
-          ? null
-          : Image.asset(basemodel?.currentConditions?.iconURL ?? ""),
-    );
+  Text TextDay(BuildContext context) {
+    return Text(DateFormat('EEEE').format(DateTime.now()),
+        style: Theme.of(context).textTheme.displaySmall);
   }
 
-  Widget DayofTheWeekText(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 20),
-      child: Text(
-        DateFormat('EEEE').format(DateTime.now()),
-        style: Theme.of(context).textTheme.displaySmall,
-      ),
-    );
+  Text TextComment(BuildContext context) {
+    return Text(basemodel?.currentConditions?.comment ?? "null comment data",
+        style: Theme.of(context).textTheme.headline4);
   }
 
-  Container DegreeText(BuildContext context) {
-    return Container(
-      width: 150,
-      height: 150,
-      decoration: BoxDecoration(
-        color: const Color.fromARGB(255, 54, 126, 150),
-        borderRadius: BorderRadius.circular(100),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: CircleAvatar(
-          child: Text(
-            basemodel?.currentConditions?.temp?.c.toString() ?? "null",
-            style: const TextStyle(
-                fontSize: 70, fontWeight: FontWeight.w200, color: Colors.white),
-            textAlign: TextAlign.center,
-          ),
-          backgroundColor: scaffoldColor,
-        ),
-      ),
-    );
+  Text TextTempe(BuildContext context) {
+    return Text("${basemodel?.currentConditions?.temp?.c}\u2103",
+        style: Theme.of(context).textTheme.displayLarge);
   }
 
-  Container regionText(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.only(top: 10, bottom: 20),
-      child: Text(
-        basemodel?.region ?? "Null region data",
-        style: Theme.of(context)
-            .textTheme
-            .headline5
-            ?.copyWith(color: Colors.white),
-      ),
-    );
-  }
-
-  Text timeText(BuildContext context) {
-    return Text(
-      "${DateTime.now().hour} :${DateTime.now().minute} ",
-      style: Theme.of(context)
-          .textTheme
-          .displayMedium
-          ?.copyWith(color: Colors.white),
-    );
+  Text TextTime(BuildContext context) {
+    return Text("${DateTime.now().hour} :${DateTime.now().minute} ",
+        style: Theme.of(context).textTheme.displayMedium);
   }
 
   AppBar appbar() {
