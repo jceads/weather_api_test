@@ -8,15 +8,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         textTheme: const TextTheme(
-          headline5: TextStyle(color: Colors.white),
-          headline4: TextStyle(color: Colors.white),
-          headline3: TextStyle(color: Colors.white),
-          headline2: TextStyle(color: Colors.white),
-          headline1: TextStyle(color: Colors.white),
-          bodyText1: TextStyle(color: Colors.white),
-          bodyText2: TextStyle(color: Colors.white),
+          headline5: TextStyle(color: Colors.black),
+          headline4: TextStyle(color: Colors.black),
+          headline3: TextStyle(color: Colors.black),
+          headline2: TextStyle(color: Colors.black),
+          headline1: TextStyle(color: Colors.black),
+          bodyText1: TextStyle(color: Colors.black),
+          bodyText2: TextStyle(color: Colors.black),
         ),
       ),
       title: 'Material App',
