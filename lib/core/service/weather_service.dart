@@ -1,5 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:weather_api_test/core/service/model/region_model.dart';
+import 'package:weather_api_test/WeatherMvvm/model/city_model.dart';
 
 class WeatherNetwork {
   final String _baseUrl = "https://weatherdbi.herokuapp.com/data/weather/";
@@ -18,7 +18,7 @@ class WeatherNetwork {
       onResponse: (e, handler) {
         final data = e.data;
         if (data is Map<String, dynamic>) {
-          final model = RegionModel.fromJson(data);
+          final model = BaseModel.fromJson(data);
           if (model.region == null) {
             handler.reject(
                 DioError(requestOptions: RequestOptions(path: e.realUri.path)));

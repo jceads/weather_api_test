@@ -8,7 +8,7 @@ import 'city.dart';
 
 class CityViewModel extends State<City> {
   final dio = WeatherNetwork.instance.dio;
-  Weather? weather;
+  BaseModel? basemodel;
   bool isLoading = true;
 
   @override
@@ -23,8 +23,7 @@ class CityViewModel extends State<City> {
     if (response.statusCode == 200) {
       final data = response.data;
       if (data is Map<String, dynamic>) {
-        final baseWeatherModel = Weather.fromJson(data);
-        weather = baseWeatherModel;
+        basemodel = BaseModel.fromJson(data);
       }
     }
     setState(() {});

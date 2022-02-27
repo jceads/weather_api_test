@@ -48,7 +48,7 @@ class CityView extends CityViewModel {
           children: [
             timeText(context),
             regionText(context),
-            Text(weather?.nextDays?[0].day ?? "null nextday"),
+            Text(basemodel?.nextDays?[3].day ?? "null next days"),
             IconMethod(),
             DegreeText(context),
             CommentText(context),
@@ -63,7 +63,7 @@ class CityView extends CityViewModel {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 20),
       child: Text(
-        weather?.currentConditions?.comment ?? "null comment value",
+        basemodel?.currentConditions?.comment ?? "null comment value",
         style: Theme.of(context)
             .textTheme
             .headline5
@@ -74,9 +74,9 @@ class CityView extends CityViewModel {
 
   Container IconMethod() {
     return Container(
-      child: weather?.currentConditions?.iconUrl == null
+      child: basemodel?.currentConditions?.iconURL == null
           ? null
-          : Image.asset(weather?.currentConditions?.iconUrl ?? ""),
+          : Image.asset(basemodel?.currentConditions?.iconURL ?? ""),
     );
   }
 
@@ -94,7 +94,6 @@ class CityView extends CityViewModel {
     return Container(
       width: 150,
       height: 150,
-
       decoration: BoxDecoration(
         color: const Color.fromARGB(255, 54, 126, 150),
         borderRadius: BorderRadius.circular(100),
@@ -103,7 +102,7 @@ class CityView extends CityViewModel {
         padding: const EdgeInsets.all(8.0),
         child: CircleAvatar(
           child: Text(
-            weather?.currentConditions?.temp?.c.toString() ?? "null",
+            basemodel?.currentConditions?.temp?.c.toString() ?? "null",
             style: const TextStyle(
                 fontSize: 70, fontWeight: FontWeight.w200, color: Colors.white),
             textAlign: TextAlign.center,
@@ -111,14 +110,6 @@ class CityView extends CityViewModel {
           backgroundColor: scaffoldColor,
         ),
       ),
-      // child: Padding(
-      //   padding: const EdgeInsets.symmetric(vertical: 10),
-      //   child: Text(
-      //     weather?.currentConditions?.temp?.c?.toString() ??
-      //         "null temperature Value",
-      //     style: Theme.of(context).textTheme.displayLarge,
-      //   ),
-      // ),
     );
   }
 
@@ -126,7 +117,7 @@ class CityView extends CityViewModel {
     return Container(
       padding: const EdgeInsets.only(top: 10, bottom: 20),
       child: Text(
-        weather?.region ?? "Null region data",
+        basemodel?.region ?? "Null region data",
         style: Theme.of(context)
             .textTheme
             .headline5
@@ -150,7 +141,7 @@ class CityView extends CityViewModel {
       title: Text(
         _isloading == true
             ? "Loading..."
-            : weather?.region?.toString() ?? "null region data",
+            : basemodel?.region?.toString() ?? "null region data",
       ),
       centerTitle: true,
       elevation: 0,
